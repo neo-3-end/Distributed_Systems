@@ -2,15 +2,12 @@ import socket
 
 c = socket.socket(family=socket.AF_INET, type=socket.SOCK_STREAM)
 
-c.connect(('localhost', 6666))
-c.send(bytes('Hello', 'utf-8'))
-
-with open('Client.txt', 'w') as f:
-    while True:
-        data = c.recv(2048)
-        print(data)
-        if not data:
-            break
-        f.write(data)
-f.close()
+c.connect(('localhost', 6969))
+c.send(bytes('client.txt', 'utf-8'))
+f = open('client.txt', 'r')
+file_data = f.read()
+data_to_write_in_file = file_data.encode()
+new_f = open('server.txt', 'w')
+new_f.write(data_to_write_in_file.decode())
+new_f.close()
 c.close()
